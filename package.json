@@ -1,0 +1,37 @@
+{
+  "name": "mechagochi-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "main": "node main/MainService.js",
+    "game1": "node game/GameService.js name=SHARD1",
+    "sync1": "node sync/SyncService.js name=SHARD1",
+    "bridge1-1": "node bridge/BridgeService.js name=SHARD1 number=BRIDGE1",
+    "bridge1-2": "node bridge/BridgeService.js name=SHARD1 number=BRIDGE2",
+    "bridge1-3": "node bridge/BridgeService.js name=SHARD1 number=BRIDGE3"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "errorhandler": "^1.5.1",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.3",
+    "express-promise-router": "^4.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.3",
+    "mongoose-sequence": "^5.3.1",
+    "node-random-name": "^1.0.1",
+    "path": "^0.12.7",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
+    "uuid": "^9.0.1"
+  }
+}
