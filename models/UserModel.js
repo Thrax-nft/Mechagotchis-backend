@@ -10,10 +10,10 @@ const ModelSchema = mongoose.Schema({
     level: { type: Number, default: 1 },
     character: { type: Number, default: CHARACTER_TYPE.ROBOT },
     weapons: {
-        leftArm : { type: Number, default: WEAPON_TYPE.FLAME_THROWER },
-        rightArm : { type: Number, default: WEAPON_TYPE.FLAME_THROWER },
-        leftShoulder : { type: Number, default: WEAPON_TYPE.MISSLE },
-        rightShoulder : { type: Number, default: WEAPON_TYPE.MISSLE }
+        leftArm : { type: Number, default: WEAPON_TYPE.GATLING_CANNON },
+        rightArm : { type: Number, default: WEAPON_TYPE.GATLING_CANNON },
+        leftShoulder : { type: Number, default: WEAPON_TYPE.SWARM_MISSLE },
+        rightShoulder : { type: Number, default: WEAPON_TYPE.SWARM_MISSLE }
     }
 }, {autoIndex: true, timestamps: true});
 

@@ -9,11 +9,11 @@ if(options.name === undefined) {
     process.exit();
 }
 
-let shard = config.SERVICE[options.name];
+global.shard = config.SERVICE[options.name];
 
-const app = require('./GameApp').createApp(shard.GAME.PORT, config.DB);
+const app = require('./GameApp').createApp(global.shard.GAME.PORT, config.DB);
 const server = SocketManager.getInstance().createServer(app, GameSocket);
 
-server.listen(shard.GAME.PORT, () => {
-    console.log('Game Service is started on ' + shard.GAME.PORT + ' port');
+server.listen(global.shard.GAME.PORT, () => {
+    console.log('Game Service is started on ' + global.shard.GAME.PORT + ' port');
 });

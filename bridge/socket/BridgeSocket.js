@@ -55,6 +55,16 @@ module.exports = class BridgeSocket extends ServerSocket {
                 });
             });
 
+            client.on('UpdateCharacter', (request) => {
+                let data = JSON.parse(request);
+
+                const BG_Socket = SocketManager.getInstance().getClientSocket('BGSocket');
+                if(BG_Socket === null)
+                    return;
+
+                BG_Socket.send("UpdateCharacter", data); 
+            });
+
             client.on('UpdateWeapons', (request) => {
                 let data = JSON.parse(request);
                 
@@ -63,6 +73,111 @@ module.exports = class BridgeSocket extends ServerSocket {
                     return;
 
                 BG_Socket.send("UpdateWeapons", data); 
+            });
+
+            client.on('EnterLobby', (request) => {
+                let data = JSON.parse(request);
+
+                const BG_Socket = SocketManager.getInstance().getClientSocket('BGSocket');
+                if(BG_Socket === null)
+                    return;
+
+                BG_Socket.call('EnterLobby', data, (response) => {
+                    client.emit('EnterLobby', JSON.stringify(response));
+                });
+            });
+
+            client.on('LeaveLobby', (request) => {
+                let data = JSON.parse(request);
+
+                const BG_Socket = SocketManager.getInstance().getClientSocket('BGSocket');
+                if(BG_Socket === null)
+                    return;
+
+                BG_Socket.call('LeaveLobby', data, (response) => {
+                    client.emit('LeaveLobby', JSON.stringify(response));
+                });
+            });
+
+            client.on('CreateGame', (request) => {
+                let data = JSON.parse(request);
+
+                const BG_Socket = SocketManager.getInstance().getClientSocket('BGSocket');
+                if(BG_Socket === null)
+                    return;
+
+                BG_Socket.call('CreateGame', data, (response) => {
+                    client.emit('CreateGame', JSON.stringify(response));
+                });
+            });
+
+            client.on('LeaveGame', (request) => {
+                let data = JSON.parse(request);
+
+                const BG_Socket = SocketManager.getInstance().getClientSocket('BGSocket');
+                if(BG_Socket === null)
+                    return;
+
+                BG_Socket.call('LeaveGame', data, (response) => {
+                    client.emit('LeaveGame', JSON.stringify(response));
+                });
+            });
+
+            client.on('GameSlots', (request) => {
+                let data = JSON.parse(request);
+
+                const BG_Socket = SocketManager.getInstance().getClientSocket('BGSocket');
+                if(BG_Socket === null)
+                    return;
+
+                BG_Socket.call('GameSlots', data, (response) => {
+                    client.emit('GameSlots', JSON.stringify(response));
+                });
+            });
+
+            client.on('JoinGame', (request) => {
+                let data = JSON.parse(request);
+
+                const BG_Socket = SocketManager.getInstance().getClientSocket('BGSocket');
+                if(BG_Socket === null)
+                    return;
+
+                BG_Socket.call('JoinGame', data, (response) => {
+                    client.emit('JoinGame', JSON.stringify(response));
+                });
+            });
+
+            client.on('ConfirmReady', (request) => {
+                let data = JSON.parse(request);
+
+                const BG_Socket = SocketManager.getInstance().getClientSocket('BGSocket');
+                if(BG_Socket === null)
+                    return;
+
+                BG_Socket.call('ConfirmReady', data, (response) => {
+                    client.emit('ConfirmReady', JSON.stringify(response));
+                });
+            });
+
+            client.on('Confirmed', (request) => {
+                let data = JSON.parse(request);
+
+                const BG_Socket = SocketManager.getInstance().getClientSocket('BGSocket');
+                if(BG_Socket === null)
+                    return;
+
+                BG_Socket.call('Confirmed', data, (response) => {
+                    client.emit('Confirmed', JSON.stringify(response));
+                });
+            });
+
+            client.on('StartMatch', (request) => {
+                let data = JSON.parse(request);
+                const BG_Socket = SocketManager.getInstance().getClientSocket('BGSocket');
+                if(BG_Socket === null)
+                    return;
+
+                BG_Socket.send("StartMatch", data); 
             });
         });
     }

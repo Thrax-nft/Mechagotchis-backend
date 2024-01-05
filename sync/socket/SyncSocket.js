@@ -1,4 +1,5 @@
 const ServerSocket = require('../../common/socket/ServerSocket');
+const SyncProcessor = require('../processor/SyncProcessor');
 
 module.exports = class SyncSocket extends ServerSocket {
     constructor(server) {
@@ -15,6 +16,15 @@ module.exports = class SyncSocket extends ServerSocket {
             client.on('disconnect', () => {
                 this.removeEndPoint(client.id);
                 console.log(`### Bridge service is disconnected from ${client.id} ###`);
+            });
+
+            client.on('StartSync', (data) => {
+                let newRoom = SyncProcessor.getInstance().addRoom(data.roomId);
+                if(newRoom === null)
+                    return;
+                
+                newRoom.addPlayers(data.players);
+                newRoom.notifyStartGame();
             });
         });
     }

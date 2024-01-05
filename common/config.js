@@ -9,7 +9,7 @@ module.exports = {
             PORT: 5000
         },
         SHARD1: {
-            NAME: 'World-War',
+            NAME: 'WORLD',
             GAME: {
                 HOST: 'http://192.168.136.131:5001',
                 PORT: 5001

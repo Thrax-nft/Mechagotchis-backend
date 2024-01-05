@@ -18,5 +18,30 @@ module.exports = class BGSocket extends ClientSocket {
         this.socket.on('disconnect', () => {
             console.log('### Disconnected from Game Service ###');
         });
+
+        this.socket.on('UpdateGame', (data) => {
+            let server_socket = SocketManager.getInstance().getServerSocket();
+            if(server_socket === null)
+                return;
+
+            server_socket.broadCast('UpdateGame', JSON.stringify(data));
+        });
+
+        this.socket.on('UpdateGameState', (data) => {
+            let server_socket = SocketManager.getInstance().getServerSocket();
+            if(server_socket === null)
+                return;
+
+            for(let index = 0; index < data.players.length; index++) 
+                server_socket.sendToEndPoint(data.players[index], 'UpdateGameState', JSON.stringify({roomId: data.roomId, joiners: data.state}));
+        });
+
+        this.socket.on('StartSync', (data) => {
+            const BS_Socket = SocketManager.getInstance().getClientSocket('BSSocket');
+            if(BS_Socket === null)
+                return;
+
+            BS_Socket.send('StartSync', data);
+        }); 
     }
 }

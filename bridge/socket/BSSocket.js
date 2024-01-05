@@ -18,5 +18,14 @@ module.exports = class BSSocket extends ClientSocket {
         this.socket.on('disconnect', () => {
             console.log('### Disconnected from Sync Service ###');
         });
+
+        this.socket.on('StartMatch', (data) => {
+            let server_socket = SocketManager.getInstance().getServerSocket();
+            if(server_socket === null)
+                return;
+
+            for(let index = 0; index < data.players.length; index++) 
+                server_socket.sendToEndPoint(data.players[index].id, 'StartMatch', JSON.stringify({roomId: data.roomId, loadTime: data.loadTime}));
+        });
     }
 }
